@@ -15,6 +15,8 @@ import { ClientTabsNavigator } from './src/Presentation/navigator/ClientTabsNavi
 import { ProfileUpdateScreen } from './src/Presentation/views/profile/update/ProfileUpdate';
 import { User } from './src/Domain/entities/User';
 import { UserProvider } from './src/Presentation/context/UserContext';
+import { AdminCategoryListScreen } from './src/Presentation/views/admin/category/list/CategoryList';
+import { AdminCategoryCreateScreen } from './src/Presentation/views/admin/category/create/CategoryCreate'
 
 
 
@@ -26,6 +28,7 @@ export type RootStackParamList = {
   ProfileUpdateScreen: {user: User},
   AdminTabsNavigator: undefined,
   ClientTabsNavigator: undefined,
+  AdminCategoryCreateScreen: undefined,
 }
 
 // Crear un stack de navegación nativo utilizando la interfaz definida anteriormente
@@ -84,11 +87,17 @@ const App = () => {
             headerShown: true, // Mostrar la barra de navegación
             title: 'Actualizar Usuario' // Definir el título de la barra de navegación
           }} />
+
+      <Stack.Screen
+          name="AdminCategoryCreateScreen"
+          component={AdminCategoryCreateScreen}
+          options={{
+            headerShown: true, // Mostrar la barra de navegación
+            title: 'Nueva categoria' // Definir el título de la barra de navegación
+          }} />
         
       </Stack.Navigator>
-
        </UserState>
-      
     </NavigationContainer>
   );
 };

@@ -58,6 +58,8 @@ const multer = require('multer');
  */
 const usersRoutes = require('./routes/userRoutes');
 
+const categoriesRoutes = require('./routes/categoriesRoutes');
+
 
 /**
  * Puerto en el que el servidor escucha. Utiliza el valor de la variable de entorno PORT si está definido, de lo contrario, utiliza el puerto 3000.
@@ -127,6 +129,7 @@ const upload = multer({
  * @param {object} upload - Objeto de multer.
  */
 usersRoutes(app, upload);
+categoriesRoutes(app, upload);
 
 /**
  * Hace que el servidor escuche en el puerto 3000 de la dirección IP especificada (192.168.100.14 o localhost) e imprime un mensaje en la consola indicando que el servidor se ha iniciado correctamente.
