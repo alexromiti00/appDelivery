@@ -18,7 +18,7 @@ module.exports = {
             }
         }
 
-        category.create(user, (err, id) => {
+        Category.create(category, (err, id) => {
 
         
             if (err) {

@@ -1,4 +1,4 @@
-const de = require('../config/config');
+const db = require('../config/config');
 const Category = {};
 
 Category.create = (category, result) =>{
@@ -15,11 +15,11 @@ Category.create = (category, result) =>{
         VALUES(?, ?, ?, ?, ?)
             
     `;
-        db.querry
+        db.query(
             sql,
             [
                 category.name,
-                category.desription,
+                category.description,
                 category.image,
                 new Date(),
                 new Date()
@@ -34,5 +34,6 @@ Category.create = (category, result) =>{
                     result(null, res.insertId);
                 }
             }
-
+        )
 }
+module.exports = Category;
