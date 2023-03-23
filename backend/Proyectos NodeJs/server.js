@@ -143,7 +143,7 @@ server.listen(3000, '192.168.100.24' || 'localhost', function() {
 /**
  * Middleware para manejar errores en el servidor.
  */
-app.use((err, req, res, next) => {Z
+app.use((err, req, res, next) => {
     console.log(err);
     res.status(err.status || 500).send(err.stack);
 });

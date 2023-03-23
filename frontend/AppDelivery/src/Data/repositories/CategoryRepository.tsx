@@ -9,6 +9,28 @@ import { AxiosError } from "axios";
 export class CategoryRepositoryImpl implements CategoryRepository{
 
 
+     async getAll(): Promise<Category[]> {
+
+        try {
+
+            const  response = await ApiDelivery.get<Category[]>('/categories/getAll');
+            console.log('Categories: ' +JSON.stringify(response.data));
+            return Promise.resolve(response.data);//Pasamos la respuesrta del servidor
+            
+        } catch (error) {
+
+            // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+            let e = (error as AxiosError);
+            console.log('ERROR: ' + JSON.stringify(e.response?.data));
+            const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+            return Promise.resolve([])
+            
+        }
+        
+    }
+
+
+
      async create(Category: Category, file: ImagePicker.ImageInfo): Promise<ResponseApiDelivery>{
 
         try {
@@ -33,7 +55,23 @@ export class CategoryRepositoryImpl implements CategoryRepository{
         }
 
     }
+     
 
+   async remove(id: string): Promise<ResponseApiDelivery> {
+        
+            try {
+                const response = await ApiDelivery.delete<ResponseApiDelivery>(`/categories/delete/${id}`);
+                return Promise.resolve(response.data);
+            } catch (error) {
+                 // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+                let e = (error as AxiosError);
+                console.log('ERROR: ' + JSON.stringify(e.response?.data));
+                const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+                return Promise.resolve(apiError)
+            }
+
+
+    }
 
 
 }

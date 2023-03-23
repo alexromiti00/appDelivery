@@ -22,8 +22,11 @@ const AdminCategoryCreateViewModel = () => {
 
     const createCategory = async () => {
 
+        setLoading(true);//Muestra vista de cargando//manda la pantalla antes de la  peticion
         const response = await CreateCategoryUseCase(values, file!);
+        setLoading(false);//Esconde la vista de carga despues de mandar lla peticion
             setResponseMessage(response.message)
+            resetForm();
         
     }
 
@@ -60,7 +63,18 @@ const AdminCategoryCreateViewModel = () => {
             setFile(result);
         }
     }
-  
+    
+    //Resetea los valores del formulario
+    const resetForm = async () => {
+        setValues({
+         name: '',
+         description: '',
+         image: '',
+        })
+
+
+
+    }
   
   
   
