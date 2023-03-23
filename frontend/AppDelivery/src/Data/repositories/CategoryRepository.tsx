@@ -55,7 +55,56 @@ export class CategoryRepositoryImpl implements CategoryRepository{
         }
 
     }
-     
+
+
+     async update(category: Category): Promise<ResponseApiDelivery> {
+        
+        try {
+
+            const  response = await ApiDelivery.put<ResponseApiDelivery>('/categories/update', category);
+            return Promise.resolve(response.data)
+
+        } catch (error) {
+            
+              // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+              let e = (error as AxiosError);
+              console.log('ERROR: ' + JSON.stringify(e.response?.data));
+              const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+              return Promise.resolve(apiError)
+
+        }
+    }
+
+    async updateWihtImage(category: Category, file: ImagePicker.ImageInfo): Promise<ResponseApiDelivery>{
+
+        try {
+
+             // Creamos un objeto FormData para enviar la imagen y los datos del usuario a la API
+             let data = new FormData();
+             data.append('image', {
+                 // @ts-ignore
+                 uri: file.uri,
+                 name: file.uri.split('/').pop(),
+                 type: mime.getType(file.uri)!
+             });
+             data.append('category', JSON.stringify(category));
+             // Hacemos una solicitud HTTP POST para registrar el usuario con la imagen en la API
+            const response = await ApiDeliveryForImage.put<ResponseApiDelivery>('/categories/updateWithImage', data);
+            return Promise.resolve(response.data);
+            
+        } catch (error) {
+            
+          // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+          let e = (error as AxiosError);
+          console.log('ERROR: ' + JSON.stringify(e.response?.data));
+          const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+          return Promise.resolve(apiError)
+
+        }
+        
+        
+    }
+      
 
    async remove(id: string): Promise<ResponseApiDelivery> {
         

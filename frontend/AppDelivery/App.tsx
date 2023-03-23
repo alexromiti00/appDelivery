@@ -17,6 +17,8 @@ import { User } from './src/Domain/entities/User';
 import { UserProvider } from './src/Presentation/context/UserContext';
 import { AdminCategoryListScreen } from './src/Presentation/views/admin/category/list/CategoryList';
 import { AdminCategoryCreateScreen } from './src/Presentation/views/admin/category/create/CategoryCreate'
+import { Category } from './src/Domain/entities/Category';
+import { AdminCategoryUpdateScreen } from './src/Presentation/views/admin/category/update/CategoryUpdate';
 
 
 
@@ -29,6 +31,7 @@ export type RootStackParamList = {
   AdminTabsNavigator: undefined,
   ClientTabsNavigator: undefined,
   AdminCategoryCreateScreen: undefined,
+  AdminCategoryUpdateScreen: {category: Category},
 }
 
 // Crear un stack de navegación nativo utilizando la interfaz definida anteriormente
@@ -94,6 +97,14 @@ const App = () => {
           options={{
             headerShown: true, // Mostrar la barra de navegación
             title: 'Nueva categoria' // Definir el título de la barra de navegación
+          }} />
+
+      <Stack.Screen
+          name="AdminCategoryUpdateScreen"
+          component={AdminCategoryUpdateScreen}
+          options={{
+            headerShown: true, // Mostrar la barra de navegación
+            title: 'Editar categoria' // Definir el título de la barra de navegación
           }} />
         
       </Stack.Navigator>
