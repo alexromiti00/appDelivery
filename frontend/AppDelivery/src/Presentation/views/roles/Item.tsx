@@ -1,9 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react'
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native'
-import { RootStackParamList } from '../../../../App';
 import { Rol } from '../../../Domain/entities/Rol';
 import { MyColors } from '../../theme/AppTheme';
+import { RootStackParamList } from '../../navigator/MainStackNavigator';
 
 interface Props {
     rol: Rol,// objeto que representa el rol a mostrar

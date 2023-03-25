@@ -3,6 +3,7 @@ import { Image, Touchable, TouchableOpacity } from 'react-native';
 import { AdminCategoryListScreen } from '../views/admin/category/list/CategoryList';
 import { AdminOrderListScreen } from '../views/admin/order/list/OrderList';
 import { ProfileInfoScreen } from '../views/profile/info/ProfileInfo';
+import { AdminCategoryNavigator }  from './AdminCategoryNavigator'
 
 // Crea un nuevo TabNavigator para la pantalla de administrador
 const Tab = createBottomTabNavigator();
@@ -11,36 +12,40 @@ const Tab = createBottomTabNavigator();
 // Define el TabNavigator y sus respectivas pantallas
 export const AdminTabsNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+     screenOptions={{
+        headerShown: false
+     }}
+    >
       
       {/* Primera pantalla - Lista de Categorías */}
       <Tab.Screen 
-        name="AdminCategoryListScreen" 
-        component={AdminCategoryListScreen} 
+        name="AdminCategoryNavigator" 
+        component={AdminCategoryNavigator} 
         options={({route, navigation}) =>(
 
           {
-            title: 'Categorias', // Texto del encabezado en la pantalla
-            tabBarLabel: 'Categorias', // Texto de la pestaña en el TabNavigator
-            tabBarIcon: ({ color }) => (// Icono de la pestaña en el TabNavigator
+            title: 'Categorias',
+            tabBarLabel: 'Categorias',
+            tabBarIcon: () => (
               <Image
-                source={ require('../../../assets/list.png') }
-                style={{ width: 25, height: 25 }}
-                />
-            ),
-            headerRight:  () => (
+              source={ require('../../../assets/list.png') }
+              style={{ width: 25, height: 25 }}
+              />
+          ),
+          headerRight:  () => (
   
               <TouchableOpacity  onPress= {() =>  navigation.navigate('AdminCategoryCreateScreen')}>
   
-                <Image
+              <Image
                   source={ require('../../../assets/add.png') }
                   style={{width: 35, height: 35, marginRight: 20 }}
-                />
+              />
   
               </TouchableOpacity>
-            )
+          )
           }
-        )}
+    )}
       />
       
       {/* Segunda pantalla - Lista de Pedidos */}

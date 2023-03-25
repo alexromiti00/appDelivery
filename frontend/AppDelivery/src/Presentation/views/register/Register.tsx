@@ -6,7 +6,7 @@ import useViewModel from './ViewModel';
 import styles from './Styles';
 import { ModalPickImage } from '../../components/ModalPickImage';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../App';
+import { RootStackParamList } from '../../navigator/MainStackNavigator';
 import { MyColors } from '../../theme/AppTheme';
 
 // Declaramos las propiedades de navegación que recibirá el componente

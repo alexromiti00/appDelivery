@@ -6,8 +6,8 @@ import useViewModel from './ViewModel';
 import styles from './Styles';
 import { ModalPickImage } from '../../../components/ModalPickImage';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../../App';
 import { MyColors } from '../../../theme/AppTheme';
+import { RootStackParamList } from '../../../navigator/MainStackNavigator';
 //Nota para actualizar la contrase;a seria actualizar cerrar sesion y de nuevo logearte con la nueva contraseña
 // Declaramos las propiedades de navegación que recibirá el componente
 interface Props extends StackScreenProps<RootStackParamList, 'ProfileUpdateScreen'>{};
