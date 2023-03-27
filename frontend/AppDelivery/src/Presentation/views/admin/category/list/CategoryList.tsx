@@ -9,9 +9,7 @@ export const AdminCategoryListScreen = () => {
  
  const { categories,responseMensagge, getCategories, deleteCategory } = useViewModel();
 
-  useEffect(() => {// Cuando sea llamada esta pantalla muestre el siguiente metodo para ver la lista de categorias
-   getCategories();
-  }, [])
+
 
   useEffect(() => {
     if (responseMensagge !== '') {

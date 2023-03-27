@@ -1,7 +1,7 @@
 import { Category } from "../../Domain/entities/Category";
 import * as ImagePicker from 'expo-image-picker';
 import { ResponseApiDelivery } from "../../Data/sources/remote/models/ResponseApiDelivery";
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { GetAllCategoryUseCase } from "../../Domain/useCases/category/GetAllCategory";
 import { CreateCategoryUseCase } from "../../Domain/useCases/category/CreateCategory";
 import { UpdateCategoryUseCase } from "../../Domain/useCases/category/UpdateCategoy";
@@ -30,6 +30,12 @@ export const CategoryProvider = ({children}: any) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
 
+    useEffect(() => {// Cuando sea llamada esta pantalla muestre el siguiente metodo para ver la lista de categorias
+        if (categories.length === 0) {
+            getCategories();// metodo que trae las categorias a renderizar
+        }
+       }, [])
+
     const getCategories = async(): Promise<void> => {
         const result = await GetAllCategoryUseCase();
         setCategories(result);
@@ -38,14 +44,14 @@ export const CategoryProvider = ({children}: any) => {
     const create = async (category: Category, file: ImagePicker.ImageInfo ): Promise<ResponseApiDelivery> => {
 
         const response = await CreateCategoryUseCase(category, file!);
-        setCategories(categories)
+         getCategories();
         return response;
     }
     
     const update = async(category: Category): Promise<ResponseApiDelivery> =>{
 
         const response = await UpdateCategoryUseCase(category);
-        setCategories(categories)
+        getCategories();
         return response;
     }
 
@@ -53,14 +59,14 @@ export const CategoryProvider = ({children}: any) => {
     const updateWihtImage = async(category: Category, file: ImagePicker.ImageInfo): Promise<ResponseApiDelivery> =>{
 
         const response = await UpdateWhitImageCategoryUseCase(category, file);
-        setCategories(categories)
+        getCategories();
         return response;
     }
 
 
     const remove = async(id: string): Promise<ResponseApiDelivery> =>{
         const response = await DeleteCategoryUseCase(id);
-        setCategories(categories)
+        getCategories();
         return response;
     }
     return (

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as ImagePicker from 'expo-image-picker';
 import { Category } from '../../../../../Domain/entities/Category';
 import { UpdateCategoryUseCase } from '../../../../../Domain/useCases/category/UpdateCategoy';
 import { UpdateWhitImageCategoryUseCase } from '../../../../../Domain/useCases/category/UpdateWhitImageCategory';
 import { ResponseApiDelivery } from '../../../../../Data/sources/remote/models/ResponseApiDelivery';
+import { CategoryContext } from '../../../../context/CategoryContext';
 
 const AdminCategoryUpdateViewModel = (category: Category) => {
   
@@ -14,6 +15,7 @@ const AdminCategoryUpdateViewModel = (category: Category) => {
     const [responseMessage, setResponseMessage] = useState('');// Estado del mensaje de exito en el formulario
     const [loading, setLoading] = useState(false);// Estado de carga del formulario
     const [file, setFile] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
+    const { update, updateWihtImage } = useContext(CategoryContext)
   
     const onChange = (property: string, value: any) => {
         setValues({ ...values, [property]: value });
@@ -26,11 +28,11 @@ const AdminCategoryUpdateViewModel = (category: Category) => {
 
         if (values.image?.includes('https://')) {//Actualizar sin imagen
 
-            response = await UpdateCategoryUseCase(values);
+            response = await update(values);
         }
         else{//Actualiza con imagen
 
-            response = await UpdateWhitImageCategoryUseCase(values, file!);
+            response = await updateWihtImage(values, file!);
         }
         
 
