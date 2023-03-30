@@ -28,10 +28,7 @@ const AdminProductCreateStyles = StyleSheet.create({
          bottom: 0
     },
     buttonContainer:{
-        position: 'absolute',
-        bottom: 25,
-        left:20,
-        right:20,
+        marginTop: 80,
     },
     categoryInfo:{
         marginTop: 30,

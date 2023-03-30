@@ -9,6 +9,7 @@ import { MyColors, MyStyles } from '../../../../theme/AppTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ProductStackParamList } from '../../../../navigator/AdminProductNavigator';
 import { ModalPickMultipleImage } from '../../../../components/ModalPickMultipleImage copy';
+import { ScrollView } from 'react-native-gesture-handler';
  
 
 interface Props extends StackScreenProps<ProductStackParamList, 'AdminProductCreateScreen'>{};//Aqui hereda las caracteristicas
@@ -101,7 +102,9 @@ export const AdminProductCreateScreen = ({navigation, route}: Props) => {
 
       <View style={styles.form}>
 
-      <View style={styles.categoryInfo}>
+        <ScrollView>
+
+            <View style={styles.categoryInfo}>
 
         <Image
           style={styles.imageCategory}
@@ -133,20 +136,23 @@ export const AdminProductCreateScreen = ({navigation, route}: Props) => {
         <CustomTextInput
             placeholder='Precio '
             image={require('../../../../../../assets/price.png')}
-            keyboardType='default'
+            keyboardType='numeric'
             property='price'
             value={ price }
             onChangeText={ onChange }
         />
 
-
-      </View>
         <View style={styles.buttonContainer}>
           <RoundedButton
           text=' Crear Producto'
           onPress={() => createProduct()}
           />
         </View>
+        
+
+        </ScrollView>
+
+      </View>
 
 
         <ModalPickMultipleImage

@@ -3,6 +3,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { CreateCategoryUseCase } from '../../../../../Domain/useCases/category/CreateCategory';
 import { CategoryContext } from '../../../../context/CategoryContext';
 import { Category } from '../../../../../Domain/entities/Category';
+import { ProductContext } from '../../../../context/ProductContext';
 
 const AdminProductCreateViewModel = (category: Category) => {
   
@@ -13,8 +14,8 @@ const AdminProductCreateViewModel = (category: Category) => {
         image1: '',
         image2: '',
         image3: '',
-        price: '',
-        idCategory:category.id,
+        price: 0,
+        id_category:category.id,
     });
 
    
@@ -23,7 +24,7 @@ const AdminProductCreateViewModel = (category: Category) => {
     const [file1, setFile1] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
     const [file2, setFile2] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
     const [file3, setFile3] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
-    const { create} = useContext(CategoryContext) ;
+    const { create} = useContext(ProductContext) ;
   
     const onChange = (property: string, value: any) => {
         setValues({ ...values, [property]: value });
@@ -31,11 +32,20 @@ const AdminProductCreateViewModel = (category: Category) => {
 
     const createProduct = async () => {
         console.log('Producto Formulario' + JSON.stringify(values))
-        /*setLoading(true);//Muestra vista de cargando//manda la pantalla antes de la  peticion
-        const response = await create(values, file!);
+
+        let files = [];
+        files.push(file1!);
+        files.push(file2!);
+        files.push(file3!);
+        setLoading(true);//Muestra vista de cargando//manda la pantalla antes de la  peticion
+        const response = await create(values, files);
         setLoading(false);//Esconde la vista de carga despues de mandar lla peticion
             setResponseMessage(response.message)
-            resetForm();*/
+            if (response.success) {
+                
+                resetForm();
+            }
+            
         
     }
 
@@ -97,11 +107,17 @@ const AdminProductCreateViewModel = (category: Category) => {
     
     //Resetea los valores del formulario
     const resetForm = async () => {
-       /* setValues({
-         name: '',
-         description: '',
-         image: '',
-        })*/
+       setValues({
+
+        name: '',
+        description: '',
+        image1: '',
+        image2: '',
+        image3: '',
+        price: 0,
+        id_category:category.id,
+
+        })
     }
   
   

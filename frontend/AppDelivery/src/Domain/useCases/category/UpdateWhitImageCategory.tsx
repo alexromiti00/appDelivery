@@ -3,7 +3,7 @@ import { CategoryRepositoryImpl } from '../../../Data/repositories/CategoryRepos
 import { Category } from '../../entities/Category';
 import * as ImagePicker from 'expo-image-picker';
 
-const { updateWihtImage } = new CategoryRepositoryImpl
+const { updateWihtImage } = new CategoryRepositoryImpl();
 
 export const UpdateWhitImageCategoryUseCase = async (Category: Category, file: ImagePicker.ImageInfo) => {
   return await updateWihtImage (Category, file)

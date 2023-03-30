@@ -6,7 +6,7 @@ const Product = {};
 
     const sql =  `
     INSERT INTO
-        categories(
+        products(
             name,
             description,
             price,
@@ -25,7 +25,7 @@ const Product = {};
             [
                 product.name,
                 product.description,
-                product.proce,
+                product.price,
                 product.image1,
                 product.image2,
                 product.image3,
@@ -70,7 +70,7 @@ Product.update = (product, result) =>{
             [
                 product.name,
                 product.description,
-                product.proce,
+                product.price,
                 product.image1,
                 product.image2,
                 product.image3,

@@ -5,7 +5,7 @@ const asyncForeach = require ('../utils/async_foreach');
 module.exports = {
 
  //Metodo para insertar tres imagenes en una soa peticion   HTTP
-    async create(req, res) {
+    create(req, res) {
 
             const product = JSON.parse(req.body.product); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
 
@@ -13,7 +13,7 @@ module.exports = {
 
             let inserts = 0;// Esta variable llevara la cuenta de cuantas imagenes se han insertado
 
-            if (file.length === 0 ) {
+            if (files.length === 0 ) {
                   
                 return res.status(501).json({
                     success: false,
@@ -32,7 +32,7 @@ module.exports = {
                         });
                     }
 
-                    product.id =  product.id;
+                    product.id =  id_product;
                     const start = async () => {
 
 
@@ -70,7 +70,7 @@ module.exports = {
 
                                     return res.status(201).json({
                                         success: true,
-                                        message: 'El  producto se almacenop correctamente',
+                                        message: 'El  producto se almaceno correctamente',
                                        data: data
                                     });   
                             }
