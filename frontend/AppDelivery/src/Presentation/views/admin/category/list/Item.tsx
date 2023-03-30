@@ -20,7 +20,11 @@ export const AdminCategoryListItem = ({category, remove}: Props) => {
  
     return (
 
-    <TouchableOpacity>
+    <TouchableOpacity
+    
+        onPress={() => navigation.navigate('AdminProductNavigator',{ category: category})}
+        
+    >
 
          <View style={ styles.container}>
                 
