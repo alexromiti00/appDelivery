@@ -17,7 +17,7 @@ interface Props extends StackScreenProps<ProductStackParamList, 'AdminProductCre
 export const AdminProductCreateScreen = ({navigation, route}: Props) => {
 
   const { category } = route.params;
-  const { name, description, image1, image2, image3, onChange, responseMessage, idCategory, price, takePhoto, pickImage, loading, createProduct} = useViewModel(category);
+  const { name, description, responseMessage, loading, image1, image2, image3, price, onChange, takePhoto, pickImage, createProduct } = useViewModel(category);
   const [modalVisible, setModalVisible] = useState(false);
   const [numberImage, setnumberImage] = useState(1);
   

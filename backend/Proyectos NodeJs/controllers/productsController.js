@@ -4,6 +4,27 @@ const asyncForeach = require ('../utils/async_foreach');
 
 module.exports = {
 
+    findByCategory(req, res){
+
+        const id_category = req.params.id_category;
+
+        Product.findByCategory(id_category, (err, data) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Hubo un error al momento de listar las categorias',
+                    error: err
+                });
+            }
+
+            return res.status(201).json(data);
+
+        });
+    },
+
+
+
  //Metodo para insertar tres imagenes en una soa peticion   HTTP
     create(req, res) {
 

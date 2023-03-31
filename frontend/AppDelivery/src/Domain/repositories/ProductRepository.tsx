@@ -7,6 +7,8 @@ import { Product } from '../entities/Product';
 
     create(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
 
+    findByCategory(idCategory: string): Promise<Product[]>;
+
 
 
 

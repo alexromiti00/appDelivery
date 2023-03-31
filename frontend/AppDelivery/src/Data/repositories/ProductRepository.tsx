@@ -3,12 +3,26 @@ import { ImageInfo } from 'expo-image-picker';
 import mime from 'mime';
 import { Product } from '../../Domain/entities/Product';
 import { ProductRepository } from '../../Domain/repositories/ProductRepository';
-import { ApiDeliveryForImage } from '../sources/remote/api/ApiDelivery';
+import { ApiDelivery, ApiDeliveryForImage } from '../sources/remote/api/ApiDelivery';
 import { ResponseApiDelivery } from '../sources/remote/models/ResponseApiDelivery';
 
-
-
 export class ProductRepositoryImpl implements ProductRepository{
+    
+        async findByCategory(idCategory: string): Promise<Product[]> {
+            
+            try {
+
+                const response = await ApiDelivery.get<Product[]>(`/products/findByCategory/${idCategory}`);
+                 return Promise.resolve(response.data);
+
+            } catch (error) {
+
+            let e = (error as AxiosError);
+            console.log('ERROR: ' + JSON.stringify(e.response?.data));
+            return Promise.resolve([])
+ 
+            }
+        }
 
         async create(product: Product, files: ImageInfo[]): Promise<ResponseApiDelivery> {
             
