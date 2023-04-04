@@ -127,4 +127,30 @@ Product.update = (product, result) =>{
         );
 }
 
+Product.delete = (id, result) => {
+
+    const sql =  `
+    DELETE FROM
+        products
+    WHERE
+        id = ?
+    
+    
+    `;
+     db.query(
+        sql,
+        [id],
+        (err, res) => {
+            if (err) {
+                console.log('Error:', err);
+                result(err, null);
+            }
+            else {
+                console.log('Id del producto eliminado:',  id);
+                result(null,  id);
+            }
+        }
+     )
+}
+
 module.exports = Product;

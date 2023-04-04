@@ -9,6 +9,8 @@ import { Product } from '../entities/Product';
 
     findByCategory(idCategory: string): Promise<Product[]>;
 
+    remove(product: Product): Promise<ResponseApiDelivery>;
+
 
 
 

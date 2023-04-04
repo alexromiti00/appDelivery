@@ -6,5 +6,5 @@ import * as ImagePicker from 'expo-image-picker';
 const { remove } = new CategoryRepositoryImpl();
 
 export const DeleteCategoryUseCase = async (id: string) => {
-  return await remove (id)
+  return await remove (id);
 }

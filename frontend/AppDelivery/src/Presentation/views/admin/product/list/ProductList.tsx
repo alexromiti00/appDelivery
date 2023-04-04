@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Text, View } from 'react-native'
+import { Text, ToastAndroid, View } from 'react-native'
 import { StackScreenProps } from '@react-navigation/stack';
 import { ProductStackParamList } from '../../../../navigator/AdminProductNavigator';
 import useViewModel from './ViewModel';
 import { FlatList } from 'react-native-gesture-handler';
+import { AdminProdcuctListItem } from './Item';
 
 
 interface Props  extends StackScreenProps<ProductStackParamList, 'AdminProductListScreen'>{};
@@ -11,7 +12,7 @@ interface Props  extends StackScreenProps<ProductStackParamList, 'AdminProductLi
 export const AdminProductListScreen = ({navigation, route}: Props) => {
 
   const { category } = route.params;
-  const { products, getProducts} = useViewModel();
+  const { products, responseMessage,getProducts, deleteProduct} = useViewModel();
 
   console.log('Category:' + JSON.stringify(category));
 
@@ -19,13 +20,19 @@ export const AdminProductListScreen = ({navigation, route}: Props) => {
      getProducts(category.id!);
   }, [])
 
+  useEffect(() => {
+  if (responseMessage !== '') {
+      ToastAndroid.show(responseMessage, ToastAndroid.LONG);
+  }
+  }, [responseMessage])
+
   return (
-   <View style = {{marginTop: 50}}>
+   <View style = {{backgroundColor: 'white'}}>
 
         <FlatList 
         data = { products }
         keyExtractor={(item) => (item).id!}
-        renderItem={({item}) => <Text>{item.name}</Text>}
+        renderItem={({item}) => <AdminProdcuctListItem product={item} remove={deleteProduct} category={category}/>}
         
         
         />

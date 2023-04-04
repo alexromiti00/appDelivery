@@ -7,13 +7,13 @@ module.exports = (app, upload) => {
     app.post('/api/products/create', passport.authenticate('jwt', {session:  false}), upload.array('image', 3), productsController.create);
 
     app.get('/api/products/findByCategory/:id_category', passport.authenticate('jwt', {session:  false}), productsController.findByCategory);
-     
-    /*app.get('/api/categories/getAll', passport.authenticate('jwt', {session:  false}), categoriesController.getAll);
+
+    app.delete('/api/products/delete/:id', passport.authenticate('jwt', {session:  false}), productsController.delete);
    
-    app.put('/api/categories/updateWithImage', passport.authenticate('jwt', {session:  false}), upload.array('image', 1), categoriesController.updateWithImage);
+    app.put('/api/products/updateWithImage', passport.authenticate('jwt', {session:  false}), upload.array('image', 1), productsController.updateWhitImage);
 
-    app.put('/api/categories/update', passport.authenticate('jwt', {session:  false}), categoriesController.update);
+    app.put('/api/products/update', passport.authenticate('jwt', {session:  false}), productsController.update);
 
-    app.delete('/api/categories/delete/:id', passport.authenticate('jwt', {session:  false}), categoriesController.delete);*/
+    
 
 }

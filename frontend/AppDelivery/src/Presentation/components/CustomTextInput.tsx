@@ -4,7 +4,7 @@ import { View, Image, TextInput, StyleSheet, KeyboardType  } from 'react-native'
 interface Props {
     image: any,// Imagen para mostrar junto al campo de texto
     placeholder: string,// Texto que se muestra como indicación en el campo de texto
-    value: string,// Valor actual del campo de texto
+    value: any,// Valor actual del campo de texto
     keyboardType: KeyboardType,// Tipo de teclado para el campo de texto (númerico, email, etc.)
     secureTextEntry?: boolean, // Si el campo de texto debe ser un campo de contraseña oculto
     property: string,// Nombre de la propiedad del objeto que se actualizará con el texto ingresado

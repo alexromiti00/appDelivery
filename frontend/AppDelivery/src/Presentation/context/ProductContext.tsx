@@ -3,7 +3,9 @@ import * as ImagePicker from 'expo-image-picker';
 import { ResponseApiDelivery } from "../../Data/sources/remote/models/ResponseApiDelivery";
 import { createContext, useState } from 'react';
 import { CreateProductUseCase } from '../../Domain/useCases/product/CreateProduct';
+import { DeleteProductUseCase} from '../../Domain/useCases/product/DeleteProduct'
 import { GetProductsByCategoryUseCase} from '../../Domain/useCases/product/GetProductsByCategory';
+
 
 
 export interface ProductContextProps{
@@ -12,7 +14,9 @@ export interface ProductContextProps{
 
     getProducts(idCategory: string): Promise<void>,
 
-    create(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>
+    create(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>,
+
+    remove(product: Product): Promise<ResponseApiDelivery>
 
 }
 
@@ -39,11 +43,19 @@ export const ProductProvider = ({ children }: any ) =>{
         return response;
     }
 
+    
+    const remove = async(product: Product): Promise<ResponseApiDelivery> =>{
+        const response = await DeleteProductUseCase(product);
+        getProducts(product.id_category!);
+        return response;
+    }
+
     return (
     <ProductContext.Provider value={{
         products,
         getProducts,
-        create
+        create, 
+        remove
 
     }}>
 
