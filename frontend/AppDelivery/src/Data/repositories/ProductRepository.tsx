@@ -19,7 +19,7 @@ export class ProductRepositoryImpl implements ProductRepository{
 
             let e = (error as AxiosError);
             console.log('ERROR: ' + JSON.stringify(e.response?.data));
-            return Promise.resolve([])
+            return Promise.resolve([]);
  
             }
         }
@@ -56,6 +56,61 @@ export class ProductRepositoryImpl implements ProductRepository{
 
 
         }
+
+
+        async update(product: Product): Promise<ResponseApiDelivery> {
+
+            try {
+
+                
+            const  response = await ApiDelivery.put<ResponseApiDelivery>('/products/update', product);
+            return Promise.resolve(response.data);
+                
+            } catch (error) {
+
+                 // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+              let e = (error as AxiosError);
+              console.log('ERROR: ' + JSON.stringify(e.response?.data));
+              const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+              return Promise.resolve(apiError)
+                
+            }
+            
+        }
+
+        async updateWihtImage(product: Product, files: ImageInfo[]): Promise<ResponseApiDelivery> {
+
+            try {
+
+                // Creamos un objeto FormData para enviar la imagen y los datos del usuario a la API
+                 let data = new FormData();
+    
+                files.forEach(file => {
+    
+                        data.append('image', {
+                               // @ts-ignore
+                                 uri: file.uri,
+                                name: file.uri.split('/').pop(),
+                                type: mime.getType(file.uri)!
+                        });
+                 });
+                 data.append('product', JSON.stringify(product));
+                 // Hacemos una solicitud HTTP POST para registrar el usuario con la imagen en la API
+                const response = await ApiDeliveryForImage.put<ResponseApiDelivery>('/products/updateWihtImage', data);
+                return Promise.resolve(response.data);
+                    
+                } catch (error) {
+    
+                    // Si hay un error en la solicitud, lo manejamos y devolvemos un objeto de error de la API
+                let e = (error as AxiosError);
+                console.log('ERROR: ' + JSON.stringify(e.response?.data));
+                const apiError:ResponseApiDelivery = JSON.parse(JSON.stringify(e.response?.data)); 
+                return Promise.resolve(apiError)
+                }
+            
+        }
+
+
         async remove(product: Product): Promise<ResponseApiDelivery> {
             
             

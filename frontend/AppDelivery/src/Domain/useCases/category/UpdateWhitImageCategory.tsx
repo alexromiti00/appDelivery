@@ -6,5 +6,5 @@ import * as ImagePicker from 'expo-image-picker';
 const { updateWihtImage } = new CategoryRepositoryImpl();
 
 export const UpdateWhitImageCategoryUseCase = async (Category: Category, file: ImagePicker.ImageInfo) => {
-  return await updateWihtImage (Category, file)
+  return await updateWihtImage (Category, file);
 }

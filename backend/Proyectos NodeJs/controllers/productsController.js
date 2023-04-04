@@ -65,13 +65,13 @@ module.exports = {
                             if (url != undefined && url != null) {// Se creo la imagen en firebase
                                 
                                 if (inserts == 0 ) {// Imagen 1
-                                        product.image1 = url
+                                        product.image1 = url;
                                 }
                                 else if (inserts == 1 ) {
-                                        product.image2 = url
+                                        product.image2 = url;
                                 }
                                 else if (inserts == 2 ) {
-                                    product.image3 = url
+                                    product.image3 = url;
                             }
                         }
                             await Product.update(product, (err, data ) => {
@@ -108,7 +108,7 @@ module.exports = {
 
     update(req, res){
         const product = req.body;
-        Product.update(product, (err, res) => {
+        Product.update(product, (err, data) => {
             if (err) {
                 return res.status(501).json({
                     success: false,
@@ -125,7 +125,7 @@ module.exports = {
         })
     },
 
-    updateWhitImage(req, res){
+    updateWihtImage(req, res){
         const product = JSON.parse(req.body.product); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
 
             const files = req.files;
@@ -163,13 +163,13 @@ module.exports = {
                             if (url != undefined && url != null) {// Se creo la imagen en firebase
                                 
                                 if (inserts == 0 ) {// Imagen 1
-                                        product.image1 = url
+                                        product.image1 = url;
                                 }
                                 else if (inserts == 1 ) {
-                                        product.image2 = url
+                                        product.image2 = url;
                                 }
                                 else if (inserts == 2 ) {
-                                    product.image3 = url
+                                    product.image3 = url;
                             }
                         }
                             await Product.update(product, (err, data ) => {
@@ -204,6 +204,7 @@ module.exports = {
      
     },
 
+    
 
     delete(req, res){
 

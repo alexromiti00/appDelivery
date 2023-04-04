@@ -32,7 +32,7 @@ Product.findByCategory = (id_category, result) => {
                 result(null, res);
             }
         }
-    );
+    )
 }
 
 
@@ -79,7 +79,7 @@ Product.findByCategory = (id_category, result) => {
                     result(null, res.insertId);
                 }
             }
-        );
+        )
 }
 
 
@@ -124,7 +124,7 @@ Product.update = (product, result) =>{
                     result(null,  product.id);
                 }
             }
-        );
+        )
 }
 
 Product.delete = (id, result) => {

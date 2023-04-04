@@ -10,7 +10,7 @@ module.exports = (app, upload) => {
 
     app.delete('/api/products/delete/:id', passport.authenticate('jwt', {session:  false}), productsController.delete);
    
-    app.put('/api/products/updateWithImage', passport.authenticate('jwt', {session:  false}), upload.array('image', 1), productsController.updateWhitImage);
+    app.put('/api/products/updateWihtImage', passport.authenticate('jwt', {session:  false}), upload.array('image', 3), productsController.updateWihtImage);
 
     app.put('/api/products/update', passport.authenticate('jwt', {session:  false}), productsController.update);
 

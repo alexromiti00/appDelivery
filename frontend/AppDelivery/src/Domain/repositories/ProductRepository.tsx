@@ -9,6 +9,10 @@ import { Product } from '../entities/Product';
 
     findByCategory(idCategory: string): Promise<Product[]>;
 
+    update(product: Product): Promise<ResponseApiDelivery>;
+
+    updateWihtImage(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
     remove(product: Product): Promise<ResponseApiDelivery>;
 
 

@@ -5,6 +5,7 @@ import { CategoryContext } from '../../../../context/CategoryContext';
 import { Category } from '../../../../../Domain/entities/Category';
 import { ProductContext } from '../../../../context/ProductContext';
 import { Product } from '../../../../../Domain/entities/Product';
+import { ResponseApiDelivery } from '../../../../../Data/sources/remote/models/ResponseApiDelivery';
 
 const AdminProductUpdateViewModel = ( product: Product ,category: Category) => {
   
@@ -18,28 +19,36 @@ const AdminProductUpdateViewModel = ( product: Product ,category: Category) => {
     const [file1, setFile1] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
     const [file2, setFile2] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
     const [file3, setFile3] = useState<ImagePicker.ImageInfo>()// Estado de la imagen seleccionada o tomada con la cámara
-    const { create} = useContext(ProductContext) ;
+    const { update, updateWihtImage} = useContext(ProductContext) ;
   
     const onChange = (property: string, value: any) => {
         setValues({ ...values, [property]: value });
     }
 
-    const createProduct = async () => {
-        console.log('Producto Formulario' + JSON.stringify(values))
+    const updateProduct = async () => {
+        console.log('Producto Formulario' + JSON.stringify(values));
 
         let files = [];
         files.push(file1!);
         files.push(file2!);
         files.push(file3!);
         setLoading(true);//Muestra vista de cargando//manda la pantalla antes de la  peticion
-        const response = await create(values, files);
+        
+        let response = {} as ResponseApiDelivery;
+
+        console.log('Prueba Actualizacion' + JSON.stringify(values.image1));
+        console.log('Prueba Actualizacion' + JSON.stringify(values.image2));
+        console.log('Prueba Actualizacion' + JSON.stringify(values.image3));
+
+        if (values.image1.includes('https://') && values.image2.includes('https://') && values.image3.includes('https://')) {
+            response = await update(values);
+        }
+        else{
+            response = await updateWihtImage(values, files);
+        }
         setLoading(false);//Esconde la vista de carga despues de mandar lla peticion
-            setResponseMessage(response.message)
-            if (response.success) {
-                
-                resetForm();
-            }
-            
+            setResponseMessage(response.message);
+          
         
     }
 
@@ -100,7 +109,7 @@ const AdminProductUpdateViewModel = ( product: Product ,category: Category) => {
     }
     
     //Resetea los valores del formulario
-    const resetForm = async () => {
+   /* const resetForm = async () => {
        setValues({
 
         name: '',
@@ -112,7 +121,7 @@ const AdminProductUpdateViewModel = ( product: Product ,category: Category) => {
         id_category:category.id,
 
         })
-    }
+    }*/
   
   
   
@@ -122,7 +131,7 @@ const AdminProductUpdateViewModel = ( product: Product ,category: Category) => {
         onChange,
         takePhoto,
         pickImage,
-        createProduct,
+        updateProduct,
         loading,
         responseMessage
 

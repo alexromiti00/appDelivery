@@ -17,7 +17,9 @@ export const AdminProductListScreen = ({navigation, route}: Props) => {
   console.log('Category:' + JSON.stringify(category));
 
   useEffect(() => {
-     getProducts(category.id!);
+    if (category.id !== undefined) {
+      getProducts(category.id!);
+    }
   }, [])
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export const AdminProductListScreen = ({navigation, route}: Props) => {
 
         <FlatList 
         data = { products }
-        keyExtractor={(item) => (item).id!}
+        keyExtractor={(item) => item.id!}
         renderItem={({item}) => <AdminProdcuctListItem product={item} remove={deleteProduct} category={category}/>}
         
         
