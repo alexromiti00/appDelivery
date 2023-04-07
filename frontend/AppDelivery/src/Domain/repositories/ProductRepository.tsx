@@ -13,6 +13,18 @@ import { Product } from '../entities/Product';
 
     updateWihtImage(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
 
+    updateWihtImage3(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
+    updateWihtImage2(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
+    updateWihtImage1(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
+    updateWihtImage1and2(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
+    updateWihtImage1and3(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
+    updateWihtImage2and3(product: Product, files: ImagePicker.ImageInfo[]): Promise<ResponseApiDelivery>;
+
     remove(product: Product): Promise<ResponseApiDelivery>;
 
 

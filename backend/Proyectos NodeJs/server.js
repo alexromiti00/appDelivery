@@ -137,7 +137,7 @@ productsRoutes(app, upload);
 /**
  * Hace que el servidor escuche en el puerto 3000 de la dirección IP especificada (192.168.100.14 o localhost) e imprime un mensaje en la consola indicando que el servidor se ha iniciado correctamente.
  */
-server.listen(3000, '192.168.100.24' || 'localhost', function() {
+server.listen(3000, '192.168.100.71' || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 });
 

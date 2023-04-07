@@ -5,7 +5,7 @@ import { LocalStorage } from '../../local/LocalStorage';
  // Crea una instancia de Axios para enviar solicitudes con el encabezado "Content-type: application/json"   
 
 const ApiDelivery = axios.create({
-    baseURL: 'http://192.168.100.24:3000/api',
+    baseURL: 'http://192.168.100.71:3000/api',
     headers: {
         'Content-type': 'application/json'
     }
@@ -13,7 +13,7 @@ const ApiDelivery = axios.create({
 
 // Crea una instancia de Axios para enviar solicitudes con el encabezado "Content-type: multipart/form-data" y "accept: application/json"
 const ApiDeliveryForImage = axios.create({
-    baseURL: 'http://192.168.100.24:3000/api',
+    baseURL: 'http://192.168.100.71:3000/api',
     headers: {
         'Content-type': 'multipart/form-data',
         'accept': 'application/json',
